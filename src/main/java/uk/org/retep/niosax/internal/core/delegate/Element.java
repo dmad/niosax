@@ -80,6 +80,8 @@ public class Element
      */
     private String attrQName;
 
+    private StringBuilder reference;
+
     /**
      * Delegate of an xml element.
      * 
@@ -550,8 +552,9 @@ public class Element
                 else if( c == '&' )
                 {
                     // Reference (EntityRef or CharRef)
-                    // FIXME implement
-                    throw new IllegalCharacterException( c );
+		    e.reference = new StringBuilder ();
+		    e.reference.append (c);
+		    return REFERENCE;
                 }
                 else
                 {
@@ -560,6 +563,40 @@ public class Element
                 }
             }
         },
+
+	REFERENCE
+	{
+	    @Override
+	    public StateEngine parse (final Element e,
+				      final NioSaxSource source,
+				      final char c)
+		throws SAXException
+	    {
+		e.reference.append (c);
+
+		if (';' == c) {
+		    String ref = e.reference.toString ();
+
+		    e.reference = null;
+
+		    if ("&lt;".equals (ref))
+			e.append ('<');
+		    else if ("&gt;".equals (ref))
+			e.append ('>');
+		    else if ("&quot;".equals (ref))
+			e.append ('"');
+		    else if ("&apos;".equals (ref))
+			e.append ('\'');
+		    else if ("&amp;".equals (ref))
+			e.append ('&');
+
+		    return CONTENT;
+		}
+
+		return this;
+	    }
+	},
+
         /**
          * A Child element
          */
