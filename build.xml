@@ -4,7 +4,7 @@
 	 default="package"
 	 basedir=".">
 
-  <property name="version.number" value="10.7.1"/>
+  <property name="version.number" value="0.0.0"/>
 
   <property name="deps.dir" value="deps"/>
 
