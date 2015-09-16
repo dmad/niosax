@@ -34,7 +34,6 @@
  */
 package uk.org.retep.niosax.internal.core.delegate;
 
-import com.google.common.base.Strings;
 import org.xml.sax.SAXException;
 import uk.org.retep.niosax.IllegalCharacterException;
 import uk.org.retep.niosax.NioSaxParser;
@@ -131,7 +130,7 @@ public class XMLDeclaration
      */
     protected final void invoke(final NioSaxSource source)
             throws SAXException {
-        if (!Strings.isNullOrEmpty(encoding)) {
+        if (null != encoding && !encoding.isEmpty ()) {
             final Charset cs = CharsetFactory.getCharset(encoding);
             if (cs == null) {
                 throw new SAXException("Unsupported encoding " + encoding);
@@ -149,7 +148,7 @@ public class XMLDeclaration
     }
 
     private boolean parseStandalone(String s) throws SAXException {
-        if (Strings.isNullOrEmpty(s)) {
+        if (null == s || s.isEmpty ()) {
             throw new SAXException("Unsupported standalone attribute " + s);
         }
 

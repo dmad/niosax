@@ -34,11 +34,10 @@
  */
 package uk.org.retep.niosax.charset;
 
-import com.google.common.collect.Lists;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.ServiceLoader;
 
@@ -50,14 +49,18 @@ import java.util.ServiceLoader;
  */
 public class CharsetFactory {
 
-    private final static List<Charset> CHARSETS = Lists.<Charset>newArrayList(
-            new ISO_8859_1(),
-            new US_ASCII(),
-            new UTF_16(),
-            new UTF_16BE(),
-            new UTF_16LE(),
-            new UTF_8()
-    );
+    private final static List<Charset> CHARSETS;
+
+    static {
+        CHARSETS = new ArrayList<> (6);
+
+        CHARSETS.add (new ISO_8859_1());
+        CHARSETS.add (new US_ASCII());
+        CHARSETS.add (new UTF_16());
+        CHARSETS.add (new UTF_16BE());
+        CHARSETS.add (new UTF_16LE());
+        CHARSETS.add (new UTF_8());
+    }
 
     private final static Map<String, Charset> CHARSET_MAP;
 

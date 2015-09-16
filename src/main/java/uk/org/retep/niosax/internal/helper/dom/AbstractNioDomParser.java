@@ -34,7 +34,6 @@
  */
 package uk.org.retep.niosax.internal.helper.dom;
 
-import com.google.common.base.Strings;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -120,7 +119,7 @@ public abstract class AbstractNioDomParser
             throws SAXException {
         Element e = null;
 
-        if (Strings.isNullOrEmpty(uri)) {
+        if (null == uri || uri.isEmpty ()) {
             e = document.createElement(localName);
         } else {
             e = document.createElementNS(uri, qName);

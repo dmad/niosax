@@ -15,7 +15,6 @@
   <property name="build.lib.dir" value="${build.dir}/lib"/>
 
   <path id="classpath">
-    <pathelement location="${deps.dir}/guava-14.0-rc3.jar"/>
   </path>
 
   <target name="prepare">
