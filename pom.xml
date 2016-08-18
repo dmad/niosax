@@ -5,7 +5,7 @@
 
     <groupId>com.github.damd.niosax</groupId>
     <artifactId>niosax</artifactId>
-    <version>0.0.0</version>
+    <version>10.7.4</version>
     <packaging>jar</packaging>
 
     <name>niosax</name>
